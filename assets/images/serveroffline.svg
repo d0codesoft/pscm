@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2021 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="126mm" height="199.5mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 12600 19950"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:#C4C4C4;fill-rule:nonzero}
+    .fil0 {fill:#F2F2F2;fill-rule:nonzero}
+    .fil2 {fill:white;fill-rule:nonzero}
+   ]]>
+  </style>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1564201818336">
+   <rect class="fil0" x="246.37" y="278.17" width="12075" height="19425"/>
+   <g>
+    <g>
+     <path class="fil1" d="M12058.87 540.67l0 18900 -11550 0 0 -18900 11550 0 0 0zm525 -525l-12600 0 0 19950 12600 0 0 -19950 0 0z"/>
+    </g>
+   </g>
+   <rect class="fil0" x="2346.37" y="2378.17" width="7875" height="9450"/>
+   <g>
+    <path class="fil1" d="M9958.87 2640.67l0 8925 -7350 0 0 -8925 7350 0 0 0zm525 -525l-8400 0 0 9975 8400 0 0 -9975 0 0z"/>
+   </g>
+   <rect class="fil1" transform="matrix(-1.83697E-16 1 -1 -1.83697E-16 10483.8 5265.67)" width="525" height="8400"/>
+   <rect class="fil1" transform="matrix(-1.83697E-16 1 -1 -1.83697E-16 10483.8 8415.67)" width="525" height="8400"/>
+   <path class="fil2" d="M7333.87 7103.17l0 0c0,-144.9 117.6,-262.5 262.5,-262.5l1050 0c144.9,0 262.5,117.6 262.5,262.5l0 0c0,144.9 -117.6,262.5 -262.5,262.5l-1050 0c-144.9,0 -262.5,-117.6 -262.5,-262.5z"/>
+   <path class="fil2" d="M7333.87 10253.17l0 0c0,-144.9 117.6,-262.5 262.5,-262.5l1050 0c144.9,0 262.5,117.6 262.5,262.5l0 0c0,144.9 -117.6,262.5 -262.5,262.5l-1050 0c-144.9,0 -262.5,-117.6 -262.5,-262.5z"/>
+   <path class="fil2" d="M7333.87 3953.17l0 0c0,-144.9 117.6,-262.5 262.5,-262.5l1050 0c144.9,0 262.5,117.6 262.5,262.5l0 0c0,144.9 -117.6,262.5 -262.5,262.5l-1050 0c-144.9,0 -262.5,-117.6 -262.5,-262.5z"/>
+   <circle class="fil2" cx="6283.87" cy="15240.67" r="1312.5"/>
+   <g>
+    <path class="fil1" d="M6283.87 14190.67c579.08,0 1050,470.93 1050,1050 0,579.07 -470.93,1050 -1050,1050 -579.07,0 -1050,-470.93 -1050,-1050 0,-579.07 470.92,-1050 1050,-1050l0 0zm0 -525c-869.93,0 -1575,705.08 -1575,1575 0,869.92 705.08,1575 1575,1575 869.92,0 1575,-705.08 1575,-1575 0,-869.92 -705.07,-1575 -1575,-1575l0 0z"/>
+   </g>
+  </g>
+ </g>
+</svg>
