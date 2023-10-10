@@ -35,6 +35,10 @@ class ServiceServer {
     return _dataConnect;
   }
 
+  int get id {
+    return _dataConnect.id;
+  }
+
   String getConnectedUrl(String api) {
     String url = _dataConnect.serverAddress?.trim() ?? '';
     if (url.isEmpty)
@@ -134,6 +138,7 @@ class ServiceServer {
 
 abstract class ServiceServers {
   Future<List<ServiceServer>> allServiceServers();
+  Future<bool> deleteServerConnect(int id);
 }
 
 class ServiceServerRepository implements ServiceServers {
@@ -145,5 +150,10 @@ class ServiceServerRepository implements ServiceServers {
     return List.generate(connectedData.length, (i) {
       return ServiceServer(dataConnect: connectedData[i]);
     });
+  }
+
+  @override
+  Future<bool> deleteServerConnect(int id) async {
+    return await dbinstance.deleteServerInfo(id);
   }
 }

@@ -134,4 +134,18 @@ class DBProvider {
     return result;
   }
 
+  Future<bool> deleteServerInfo(int id) async {
+    final db = await database;
+    bool result = false;
+    if (id != nullID) {
+      int countUpdate = await db.delete(
+        'server_connect',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      return countUpdate!=0 ? true : false;
+    }
+    return false;
+  }
+
 }

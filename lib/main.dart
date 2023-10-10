@@ -16,6 +16,7 @@ import 'package:sqflite/sqflite.dart';
 import 'core/app_theme.dart';
 import 'core/i18n.dart';
 import 'core/routeItem.dart';
+import 'screens/edit_server_connect_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/add_server_screen.dart';
 import 'core/utils/appHttpOverrides.dart';
@@ -35,11 +36,11 @@ void main() async {
 }
 
 final routeData = [
-  RouteItem(
-    name: l10n.addNewServerNameRoute,
-    route: 'newserver',
-    builder: (context) => AddServerScreen(),
-  )
+  //RouteItem(
+  //  name: l10n.editServerNameRoute,
+  //  route: 'editserver',
+  //  builder: (context) => EditServerScreen(),
+  //)
 ];
 
 final router = GoRouter(

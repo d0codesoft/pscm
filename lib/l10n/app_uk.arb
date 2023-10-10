@@ -5,7 +5,9 @@
   "addNewServerTooltip" : "Додати новий сервер",
   "addNewServerNameRoute" : "Новий сервер",
   "titleAddNewServer" : "Новий сервер",
+  "titleEditServer" : "Данні серверу",
   "promptAddNewServer" : "Параметри з'єднання з сервером",
+  "promptEditServer" : "Параметри з'єднання з сервером",
   "formLabelServerName" : "Ім'я",
   "formLabelServerNameHint" : "Ім'я сервера",
   "formLabelServerDescr" : "Опис",
@@ -23,5 +25,6 @@
   "formLabelServerIsActive" : "активний",
   "formLabelButtonSubmit" : "Зберегти",
   "labelSlidableButtonDelete" : "Видалити",
-  "labelSlidableButtonEdit" : "Редагувати"
+  "labelSlidableButtonEdit" : "Редагувати",
+  "editServerNameRoute" : "Редагувати підключення до серверу"
 }

@@ -1,16 +1,20 @@
 import 'dart:io';
 
+import 'package:animated_list_plus/animated_list_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:pscm/core/database.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:pscm/core/model/dataServer.dart';
 import 'package:pscm/core/utils/colorExtention.dart';
+import 'package:pscm/screens/edit_server_connect_screen.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/serverItemList.dart';
+import '../components/serverListView.dart';
 import '../core/servicesServer.dart';
 import 'add_server_screen.dart';
 
@@ -25,13 +29,14 @@ class _HomeScreenState extends State<HomeScreen> {
   DBProvider database = DBProvider.instance;
   QuickActions quickActions = QuickActions();
   ServiceServers serviceData = ServiceServerRepository();
+  bool inReorder = false;
 
-  Future homeRefresh() async {
+  Future refresh() async {
     setState(() {});
   }
 
   void getData() {
-    homeRefresh();
+    refresh();
   }
 
   Future<bool> _requestPermission() async {
@@ -46,6 +51,19 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     askPermission();
+  }
+
+  Future deleteItemServer(int id) async {
+    var result = await serviceData.deleteServerConnect(id);
+    if (result) {
+      setState(() {
+      });
+    }
+  }
+
+  Future updateItemServerInfo(ServerInfo upd) async {
+    await database.updateServerInfo(upd);
+    refresh();
   }
 
   @override
@@ -76,19 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (snapshot.data?.isEmpty ?? true) {
                     return Center(child: Text(AppLocalizations.of(context)!.listServerNoItem));
                   }
-                  return ListView.separated(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ServerItemList( serverData : snapshot.data!.elementAt(index));
-                          },
-                        separatorBuilder: (BuildContext context, int index) => Divider(
-                          height: 0,
-                          indent : 5.0,
-                          color: "#07015c".toColor(),
-                          endIndent : 5.0,
-                          thickness: 1,
-                        ),
-                    );
+                  return ServerListWidget( serverData: snapshot.data!
+                  );
                 }
               },
             )
@@ -101,8 +108,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () => {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddServerScreen()),
-                  )
+                    MaterialPageRoute(builder: (context) =>
+                         EditServerScreen()
+                    ),
+                  ).then((value) => updateItemServerInfo(value))
                 },
                 tooltip: AppLocalizations.of(context)!.addNewServerTooltip,
                 child: const Icon(Icons.add),

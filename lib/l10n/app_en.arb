@@ -5,7 +5,9 @@
   "addNewServerTooltip" : "Adding new server",
   "addNewServerNameRoute" : "Add new server",
   "titleAddNewServer" : "New server",
+  "titleEditServer" : "Edit server connection",
   "promptAddNewServer" : "Server connection parameters",
+  "promptEditServer" : "Server connection parameters",
   "formLabelServerName" : "Name",
   "formLabelServerNameHint" : "Server new",
   "formLabelServerDescr" : "Description",
@@ -23,5 +25,6 @@
   "formLabelServerIsActive" : "is Active",
   "formLabelButtonSubmit" : "Save server",
   "labelSlidableButtonDelete" : "Delete",
-  "labelSlidableButtonEdit" : "Edit"
+  "labelSlidableButtonEdit" : "Edit",
+  "editServerNameRoute" : "Edit server connection"
 }

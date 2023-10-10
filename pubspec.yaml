@@ -54,6 +54,7 @@ dependencies:
   flutter_slidable: ^3.0.0
   flutter_local_notifications: ^15.1.1
   local_auth: ^2.1.7
+  animated_list_plus: ^0.5.2
 
 dev_dependencies:
   flutter_test:
