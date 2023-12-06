@@ -136,7 +136,6 @@ class DBProvider {
 
   Future<bool> deleteServerInfo(int id) async {
     final db = await database;
-    bool result = false;
     if (id != nullID) {
       int countUpdate = await db.delete(
         'server_connect',

@@ -1,24 +1,13 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:pscm/core/database.dart';
-import 'package:pscm/core/utils/colorExtention.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'core/app_theme.dart';
-import 'core/i18n.dart';
-import 'core/routeItem.dart';
-import 'screens/edit_server_connect_screen.dart';
 import 'screens/home_screen.dart';
-import 'screens/add_server_screen.dart';
 import 'core/utils/appHttpOverrides.dart';
 
 void main() async {
@@ -47,7 +36,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => HomeScreen(),
+      builder: (context, state) => const HomeScreen(),
       routes: [
         for (final routeItem in routeData)
           GoRoute(

@@ -1,5 +1,4 @@
 // -- dto_system_information.dart --
-import 'dart:ffi';
 
 import 'package:json_annotation/json_annotation.dart';
 

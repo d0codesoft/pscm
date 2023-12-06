@@ -10,7 +10,7 @@ class EditServerScreen extends StatefulWidget {
   static String route = "AddServer";
   late ServerInfo? connectData;
 
-  EditServerScreen ({ Key? key, this.connectData }): super(key: key) {
+  EditServerScreen ({ super.key, this.connectData }) {
     connectData ??= ServerInfo(id: DBProvider.nullID);
   }
 
@@ -64,7 +64,6 @@ class _EditServerScreenState extends State<EditServerScreen> {
                           labelText:
                               AppLocalizations.of(context)!.formLabelServerName,
                         ),
-                        autofillHints: const [AutofillHints.name],
                         validator: (value) {
                           return value == null
                               ? AppLocalizations.of(context)!
@@ -133,27 +132,12 @@ class _EditServerScreenState extends State<EditServerScreen> {
                         autocorrect: false,
                         enableSuggestions: false,
                         obscureText: true,
-                        controller: controller,
                         validator: (value) {
-                          return value != null && value.length < 8
+                          return value != null
                               ? AppLocalizations.of(context)!
                                   .formLabelServerPassword
                               : null;
                         },
-                      ),
-                      FlutterPwValidator(
-                        key: validatorKey,
-                        controller: controller,
-                        minLength: 8,
-                        uppercaseCharCount: 1,
-                        lowercaseCharCount: 1,
-                        numericCharCount: 1,
-                        specialCharCount: 0,
-                        normalCharCount: 1,
-                        width: 400,
-                        height: 200,
-                        onSuccess: () {},
-                        onFail: () {},
                       ),
                       FormField<bool>(
                         builder: (formFieldState) {

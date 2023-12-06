@@ -1,11 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:pscm/core/model/dataServer.dart';
 import 'package:pscm/core/utils/colorExtention.dart';
-import 'package:vector_graphics/vector_graphics.dart';
 import 'package:pscm/core/model/dtoDataAPI.dart';
 import 'dart:developer' as developer;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,8 +14,11 @@ import '../screens/edit_server_connect_screen.dart';
 class ServerItemList extends StatefulWidget {
   final ServiceServer serverData;
   final OnDeleteItemCallback onDeleteItemCallback;
+  final OnUpdateItemCallback onUpdateItemCallback;
 
-  const ServerItemList ({ Key? key, required this.serverData, required this.onDeleteItemCallback}): super(key: key);
+  const ServerItemList ({ super.key, required this.serverData,
+        required this.onDeleteItemCallback,
+        required this.onUpdateItemCallback});
 
   @override
   ServerItemListState createState() => ServerItemListState();
@@ -42,7 +43,18 @@ class ServerItemListState extends State<ServerItemList> {
   }
 
   int get getKeyValueDismiss  {
-    return widget.serverData?.connect?.id ?? 0;
+    return widget.serverData.connect.id;
+  }
+
+  Future onEventUpdateConnect(ServerInfo dataInfo) async
+  {
+    await widget.onUpdateItemCallback(dataInfo);
+    setState(() { widget.serverData.connect = dataInfo;});
+  }
+
+  Future onEventDeleteItem() async {
+    await widget.onDeleteItemCallback(widget.serverData.connect.id);
+
   }
 
   Widget buildInfoServer(BuildContext context, stateLoadData stateLoad) {
@@ -62,7 +74,7 @@ class ServerItemListState extends State<ServerItemList> {
                       EditServerScreen(
                           connectData: widget.serverData.connect)
                   ),
-                )
+                ).then((value) async => await onEventUpdateConnect(value))
               },
               backgroundColor: '#294769'.toColor(),
               foregroundColor: Colors.white,
@@ -70,7 +82,7 @@ class ServerItemListState extends State<ServerItemList> {
               label: AppLocalizations.of(context)!.labelSlidableButtonEdit),
             SlidableAction(
               //flex:1,
-              onPressed: (context) => widget.onDeleteItemCallback(widget.serverData.connect.id),
+              onPressed: (context) => onEventDeleteItem(),
               backgroundColor: '#f55442'.toColor(),
               foregroundColor: Colors.white,
               icon: Icons.delete,
@@ -88,7 +100,7 @@ class ServerItemListState extends State<ServerItemList> {
                       child: const Image(
                     image: AssetImage('assets/images/serveroffline.png'),
                     fit: BoxFit.contain,
-                    width: 25,
+                    width: 35,
                   ))
                 else if (stateLoad == stateLoadData.load)
                   Container(
@@ -96,7 +108,7 @@ class ServerItemListState extends State<ServerItemList> {
                       child: const Image(
                     image: AssetImage('assets/images/serveroff.png'),
                     fit: BoxFit.contain,
-                    width: 25,
+                    width: 35,
                   ))
                 else if (stateLoad == stateLoadData.error)
                   Container(
@@ -104,12 +116,15 @@ class ServerItemListState extends State<ServerItemList> {
                       child: const Image(
                     image: AssetImage('assets/images/serveroffline.png'),
                     fit: BoxFit.contain,
-                    width: 25,
+                    width: 35,
                   )),
                 Column(
                     children: [
-                      Text(widget.serverData.connect.name ?? ''),
-                      Text('data')
+                      Text(widget.serverData.connect.name ?? '',
+                          style: DefaultTextStyle.of(context).style.apply(fontWeightDelta: 1,
+                            fontSizeFactor: 1.3)),
+                      Text(widget.serverData.connect.descr ?? '',
+                          style: Theme.of(context).textTheme.bodyMedium)
                     ]
                 )
               ],

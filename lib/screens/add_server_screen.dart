@@ -9,6 +9,8 @@ import '../core/model/dataServer.dart';
 class AddServerScreen extends StatefulWidget {
   static String route = "AddServer";
 
+  const AddServerScreen({super.key});
+
   @override
   _AddServerScreenState createState() => _AddServerScreenState();
 }

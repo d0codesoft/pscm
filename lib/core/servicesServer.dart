@@ -26,13 +26,15 @@ abstract interface class ServerAPI {
 }
 
 class ServiceServer {
-  final ServerInfo _dataConnect;
+  ServerInfo _dataConnect;
   DTOInformationSystem? data;
 
   ServiceServer({ required ServerInfo dataConnect }) : _dataConnect = dataConnect;
 
-  ServerInfo get connect {
-    return _dataConnect;
+  ServerInfo get connect => _dataConnect;
+
+  set connect(ServerInfo dataConnect) {
+    _dataConnect = dataConnect;
   }
 
   int get id {
@@ -57,7 +59,7 @@ class ServiceServer {
 
   Future<bool> iaAuthorizeServer() async {
     String url = getConnectedUrl(ServerAPI.RestURIGetUser);
-    developer.log("Test authorize remote server ${url}");
+    developer.log("Test authorize remote server $url");
     final response = await http
         .get(Uri.parse(url), headers: {
             HttpHeaders.contentTypeHeader: 'application/json',

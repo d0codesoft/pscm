@@ -1,25 +1,18 @@
-import 'dart:io';
 
-import 'package:animated_list_plus/animated_list_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:focused_menu/focused_menu.dart';
-import 'package:focused_menu/modals.dart';
 import 'package:pscm/core/database.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:pscm/core/model/dataServer.dart';
-import 'package:pscm/core/utils/colorExtention.dart';
 import 'package:pscm/screens/edit_server_connect_screen.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../components/serverItemList.dart';
 import '../components/serverListView.dart';
 import '../core/servicesServer.dart';
-import 'add_server_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static String route = "HomeScreen";
+
+  const HomeScreen({super.key});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -27,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DBProvider database = DBProvider.instance;
-  QuickActions quickActions = QuickActions();
+  QuickActions quickActions = const QuickActions();
   ServiceServers serviceData = ServiceServerRepository();
   bool inReorder = false;
 
@@ -61,9 +54,17 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future updateItemServerInfo(ServerInfo upd) async {
+  Future updateNewItemServerInfo(ServerInfo upd) async {
     await database.updateServerInfo(upd);
     refresh();
+  }
+
+  Future updateItemServerInfo(ServerInfo upd) async {
+    await database.updateServerInfo(upd);
+  }
+
+  Future deleteItemServerInfo(int id) async {
+    await database.deleteServerInfo(id);
   }
 
   @override
@@ -94,7 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (snapshot.data?.isEmpty ?? true) {
                     return Center(child: Text(AppLocalizations.of(context)!.listServerNoItem));
                   }
-                  return ServerListWidget( serverData: snapshot.data!
+                  return ServerListWidget( serverData: snapshot.data!,
+                    onDeleteItemCallback: deleteItemServerInfo,
+                    onUpdateItemCallback: updateItemServerInfo,
                   );
                 }
               },
@@ -111,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     MaterialPageRoute(builder: (context) =>
                          EditServerScreen()
                     ),
-                  ).then((value) => updateItemServerInfo(value))
+                  ).then((value) => updateNewItemServerInfo(value))
                 },
                 tooltip: AppLocalizations.of(context)!.addNewServerTooltip,
                 child: const Icon(Icons.add),
