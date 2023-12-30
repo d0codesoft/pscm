@@ -3,7 +3,9 @@ import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../components/qrCodeScaner.dart';
 import '../core/database.dart';
+import '../core/model/connectAccessToken.dart';
 import '../core/model/dataServer.dart';
 
 class EditServerScreen extends StatefulWidget {
@@ -24,6 +26,28 @@ class _EditServerScreenState extends State<EditServerScreen> {
   final TextEditingController controller = TextEditingController();
   final GlobalKey<FlutterPwValidatorState> validatorKey =
       GlobalKey<FlutterPwValidatorState>();
+  late ConnectAccessToken accessToken;
+
+  Future<void> _queryServerAccesCode(BuildContext context)
+  async {
+
+  }
+
+  Future<void> _navigateAndScanQrCode(BuildContext context)
+  async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) =>
+          const QrCodeScannerPage()
+      ),
+    );
+    if (result!=null && result is ConnectAccessToken)
+      {
+        accessToken = result;
+      }
+    //.then((value) =>
+    //);
+  }
 
   @override
   void initState() {
@@ -38,6 +62,15 @@ class _EditServerScreenState extends State<EditServerScreen> {
         title: Text(widget.connectData!.id == DBProvider.nullID
             ? AppLocalizations.of(context)!.titleAddNewServer
             : AppLocalizations.of(context)!.titleEditServer),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.photo_camera_back_rounded),
+            tooltip: 'Scan QR Code connect',
+            onPressed: () {
+              _navigateAndScanQrCode(context);
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: Form(

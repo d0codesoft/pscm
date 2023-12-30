@@ -35,6 +35,16 @@ class _AddServerScreenState extends State<AddServerScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.titleAddNewServer),
+        backgroundColor: Colors.green,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.login),
+            tooltip: 'Scan QR Code connect',
+            onPressed: () {
+              // handle the press
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: Form(

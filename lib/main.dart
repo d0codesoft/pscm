@@ -5,13 +5,20 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pscm/core/database.dart';
+import 'package:logging/logging.dart';
+import 'package:logging_appenders/logging_appenders.dart';
 
 import 'core/app_theme.dart';
 import 'screens/home_screen.dart';
 import 'core/utils/appHttpOverrides.dart';
 
+final _logger = Logger('pscm');
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  Logger.root.level = Level.ALL;
+  PrintAppender.setupLogging(stderrLevel: Level.ALL);
 
   HttpOverrides.global = AppHttpOverrides();
   var db = DBProvider.instance;

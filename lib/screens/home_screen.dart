@@ -114,7 +114,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     MaterialPageRoute(builder: (context) =>
                          EditServerScreen()
                     ),
-                  ).then((value) => updateNewItemServerInfo(value))
+                  ).then((value) =>
+                  {
+                    if (value!=null) {updateNewItemServerInfo(value)}
+                  })
                 },
                 tooltip: AppLocalizations.of(context)!.addNewServerTooltip,
                 child: const Icon(Icons.add),
