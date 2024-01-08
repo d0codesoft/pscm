@@ -8,22 +8,7 @@ import 'dart:developer' as developer;
 import 'database.dart';
 import 'model/dataServer.dart';
 import 'model/dtoDataAPI.dart';
-
-abstract interface class ServerAPI {
-  static String RestURIOSInfo = "api/SystemManagment/OSInfo";
-  static String RestURIRDPSession = "api/SystemManagment/RDPSession";
-  static String RestURISetRDPConn = "api/SystemManagment/SetRDPConn?allow={0}";
-  static String RestURIPausedRDP = "api/SystemManagment/PausedRDP";
-  static String RestURIResumeRDP = "api/SystemManagment/ResumeRDP";
-  static String RestURIRemoteShutdown = "api/SystemManagment/RemoteShutdown";
-  static String RestURITSInfo = "api/SystemManagment/GetTSInfo";
-  static String RestURIGetUserAccounts = "api/SystemManagment/GetUserAccounts";
-  static String RestURIBlockUserAccount = "api/SystemManagment/BlockUserAccount";
-  static String RestURIUnblockUserAccount = "api/SystemManagment/UnblockUserAccount";
-  static String RestURIActive = "api/SystemManagment/Active";
-  static String RestURIAuth = "api/Auth/LoginUser";
-  static String RestURIGetUser = "api/Auth/GetUser";
-}
+import 'serverRemoteAPI.dart';
 
 class ServiceServer {
   ServerInfo _dataConnect;
@@ -58,7 +43,7 @@ class ServiceServer {
   }
 
   Future<bool> iaAuthorizeServer() async {
-    String url = getConnectedUrl(ServerAPI.RestURIGetUser);
+    String url = getConnectedUrl(ServerAPI.restURIGetUser);
     developer.log("Test authorize remote server $url");
     final response = await http
         .get(Uri.parse(url), headers: {
@@ -87,7 +72,7 @@ class ServiceServer {
   }
 
   Future<bool> authorizedServer() async {
-    String url = getConnectedUrl(ServerAPI.RestURIAuth);
+    String url = getConnectedUrl(ServerAPI.restURIAuth);
     developer.log("Authorize server $url");
     final response = await http
         .post(Uri.parse(url), headers: {
@@ -119,7 +104,7 @@ class ServiceServer {
           return null;
         }
       }
-      String url = getConnectedUrl(ServerAPI.RestURIOSInfo);
+      String url = getConnectedUrl(ServerAPI.restURIOSInfo);
       final response = await http
           .get(Uri.parse(url), headers: {
         HttpHeaders.contentTypeHeader: 'application/json',

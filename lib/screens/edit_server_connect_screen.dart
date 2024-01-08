@@ -7,6 +7,7 @@ import '../components/qrCodeScaner.dart';
 import '../core/database.dart';
 import '../core/model/connectAccessToken.dart';
 import '../core/model/dataServer.dart';
+import '../core/serviceQrCodeConnect.dart';
 
 class EditServerScreen extends StatefulWidget {
   static String route = "AddServer";
@@ -26,7 +27,6 @@ class _EditServerScreenState extends State<EditServerScreen> {
   final TextEditingController controller = TextEditingController();
   final GlobalKey<FlutterPwValidatorState> validatorKey =
       GlobalKey<FlutterPwValidatorState>();
-  late ConnectAccessToken accessToken;
 
   Future<void> _queryServerAccesCode(BuildContext context)
   async {
@@ -35,18 +35,25 @@ class _EditServerScreenState extends State<EditServerScreen> {
 
   Future<void> _navigateAndScanQrCode(BuildContext context)
   async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>
-          const QrCodeScannerPage()
-      ),
-    );
-    if (result!=null && result is ConnectAccessToken)
-      {
-        accessToken = result;
-      }
-    //.then((value) =>
-    //);
+    Navigator.of(context).push(new MaterialPageRoute(builder: (_)=>new QrCodeScannerPage()),)
+        .then( (val) async {
+          if (val!=null && val is ConnectAccessToken) {
+              final service = serviceQrCodeConnect.fromAccessConnect(val);
+              final connectToken = await service.getConnectedToken();
+              if (connectToken != null) {
+                  widget.connectData!.token = connectToken.token;
+                  widget.connectData!.userName = connectToken.token;
+              }
+          }
+          else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(AppLocalizations.of(context)!.promptQrCodeScanError),
+                duration: const Duration(seconds: 3),
+              ),
+            );
+          }
+        });
   }
 
   @override

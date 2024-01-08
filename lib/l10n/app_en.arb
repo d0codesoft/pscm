@@ -26,5 +26,6 @@
   "formLabelButtonSubmit" : "Save server",
   "labelSlidableButtonDelete" : "Delete",
   "labelSlidableButtonEdit" : "Edit",
-  "editServerNameRoute" : "Edit server connection"
+  "editServerNameRoute" : "Edit server connection",
+  "promptQrCodeScanError" : "Error scanning QR code"
 }

@@ -26,5 +26,6 @@
   "formLabelButtonSubmit" : "Зберегти",
   "labelSlidableButtonDelete" : "Видалити",
   "labelSlidableButtonEdit" : "Редагувати",
-  "editServerNameRoute" : "Редагувати підключення до серверу"
+  "editServerNameRoute" : "Редагувати підключення до серверу",
+  "promptQrCodeScanError" : "Помилка сканування QR коду"
 }

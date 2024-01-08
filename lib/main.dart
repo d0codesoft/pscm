@@ -7,8 +7,11 @@ import 'package:go_router/go_router.dart';
 import 'package:pscm/core/database.dart';
 import 'package:logging/logging.dart';
 import 'package:logging_appenders/logging_appenders.dart';
+import 'package:pscm/screens/login_app.dart';
 
+import 'components/qrCodeScaner.dart';
 import 'core/app_theme.dart';
+import 'screens/edit_server_connect_screen.dart';
 import 'screens/home_screen.dart';
 import 'core/utils/appHttpOverrides.dart';
 
@@ -40,17 +43,27 @@ final routeData = [
 ];
 
 final router = GoRouter(
+  initialLocation: '/home',
   routes: [
     GoRoute(
-      path: '/',
+      path: '/home',
       builder: (context, state) => const HomeScreen(),
       routes: [
-        for (final routeItem in routeData)
           GoRoute(
-            path: routeItem.route,
-            builder: (context, state) => routeItem.builder(context),
+            path: 'server',
+            builder: (context, state) => EditServerScreen(),
+            routes: [
+              GoRoute(
+                  path: 'scanQrCode',
+                  builder: (context, state) => QrCodeScannerPage(),
+              ),
+            ]
           ),
       ],
+    ),
+    GoRoute(
+      path: '/login',
+      builder: (context, state) => const LoginApp(),
     ),
   ],
 );
